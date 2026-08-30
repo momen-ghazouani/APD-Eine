@@ -22,3 +22,5 @@ apd-eine/
 ## Notes
 - Data entered in each lab (names, logos, bios) is stored locally in the browser via `localStorage` — nothing is sent to a server.
 - The interface mockups for X and LinkedIn are simulated visual references for design testing and are not affiliated with X Corp. or LinkedIn Corp.
+
+Licensed under the Setaleur Non-Commercial Share-Alike License v1.0
