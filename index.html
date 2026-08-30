@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>APD Eine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="page">
+  <div class="top-bar">
+    <h1>APD Eine</h1>
+    <nav class="tabs">
+      <span class="tab-mark">A</span>
+      <button class="tab" onclick="Landing.openOverlay('app')">App</button>
+      <button class="tab" onclick="Landing.openOverlay('web')">Website</button>
+      <button class="tab" onclick="Landing.openOverlay('social')">Social media</button>
+    </nav>
+  </div>
+
+  <div class="about">
+    <h2>About APD Eine</h2>
+    <p>APD Eine is a set of small, open-source labs for pressure-testing a logo before it ships: how it sits inside an iOS home screen, how its favicon reads in a Google result, and how it looks as a profile avatar on X or LinkedIn. Pick a surface below and drop in an image to see it in place.</p>
+
+    <div class="showcase">
+      <button class="showcase-card" onclick="Landing.openOverlay('app')">
+        <div class="showcase-visual">
+          <div class="mini-app-grid">
+            <span></span><span class="hi"></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <div>
+          <h3>App icon</h3>
+          <p>See a logo inside a real iOS home-screen grid and dock, icon by icon.</p>
+        </div>
+        <span class="card-arrow">Open the app lab &#8594;</span>
+      </button>
+
+      <button class="showcase-card" onclick="Landing.openOverlay('web')">
+        <div class="showcase-visual">
+          <div class="mini-search">
+            <div class="mini-search-row"><span class="mini-favicon"></span><div class="mini-lines"><span class="mini-line title"></span><span class="mini-line url"></span></div></div>
+            <div class="mini-search-row"><span class="mini-favicon"></span><div class="mini-lines"><span class="mini-line title"></span><span class="mini-line url"></span></div></div>
+          </div>
+        </div>
+        <div>
+          <h3>Search result</h3>
+          <p>See a favicon, site name and domain the way Google renders them.</p>
+        </div>
+        <span class="card-arrow">Open the search lab &#8594;</span>
+      </button>
+
+      <button class="showcase-card" onclick="Landing.openOverlay('social')">
+        <div class="showcase-visual">
+          <div class="mini-social">
+            <div class="mini-social-banner"></div>
+            <div class="mini-social-avatar"></div>
+          </div>
+        </div>
+        <div>
+          <h3>Social profile</h3>
+          <p>See a logo as a profile avatar on an X or LinkedIn card.</p>
+        </div>
+        <span class="card-arrow">Open the social lab &#8594;</span>
+      </button>
+    </div>
+
+    <div class="footer-links">
+      <a class="icon-link" href="#" aria-label="GitHub" title="GitHub">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      </a>
+      <a class="icon-link" href="#" aria-label="Website" title="Website">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.6 2.6 4 5.9 4 9.2s-1.4 6.6-4 9.2c-2.6-2.6-4-5.9-4-9.2s1.4-6.6 4-9.2z"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="tool-overlay" id="appOverlay">
+  <button class="back-btn" onclick="Landing.closeOverlay('app')">&#8249; Back</button>
+  <div class="shell">
+    <div class="island"></div>
+    <div class="status"><span id="appTime">9:41</span><span>&#9679; &#9679; &#9648;</span></div>
+    <main class="screen">
+      <div class="header"><h1>App Lab</h1><button class="gear" onclick="AppLab.openSettings()">&#9881;</button></div>
+      <div class="grid" id="appGrid"></div>
+    </main>
+    <div class="dock" id="appDock"></div>
+
+    <section class="settings" id="appSettings">
+      <button class="close" onclick="AppLab.closeSettings()">&#215;</button>
+      <h2>App Identity</h2>
+      <div class="row"><label>SELECT APP</label><select id="appSelectedApp" onchange="AppLab.changeSelected()"></select></div>
+      <div class="preview"><div class="icon" id="appPreviewIcon">D</div><div><b id="appPreviewName">Discovery</b><div class="hint">Live preview &middot; selected app only</div></div></div>
+      <div class="row"><label>APP NAME</label><input id="appNameInput" type="text" oninput="AppLab.preview()"></div>
+      <div class="row"><label>LOGO IMAGE</label><input id="appFileInput" type="file" accept="image/*" onchange="AppLab.loadLogo(event)"><div class="hint">The logo is applied only to the selected app.</div></div>
+      <div class="row"><label>OR LOGO URL</label><input id="appUrlInput" type="url" placeholder="https://example.com/logo.png" oninput="AppLab.preview()"></div>
+      <div class="actions"><button id="appApplyBtn" class="action" onclick="AppLab.save()">Apply</button><button class="action secondary" onclick="AppLab.resetApp()">Reset</button></div>
+      <p class="hint">Each app keeps its own name and logo. Changes are saved locally on this device.</p>
+    </section>
+  </div>
+</div>
+
+<div class="tool-overlay" id="webOverlay">
+  <button class="back-btn" onclick="SearchLab.back()">&#8249; Back</button>
+  <div class="shell">
+    <div class="island"></div>
+    <div class="status"><span id="webClock">9:41</span><span>&#9679; &#9679; &#9648;</span></div>
+    <header class="top">
+      <div class="topline"><div class="title">Search Identity Lab</div><button class="gear" onclick="SearchLab.openSettingsPanel()">&#9881;</button></div>
+      <label class="search" aria-label="Search websites"><span>&#8981;</span><input id="webSearchInput" type="search" placeholder="Search websites" oninput="SearchLab.search(this.value)"></label>
+    </header>
+    <main class="results" id="webResults"></main>
+    <section class="panel" id="webSettingsPanel">
+      <button class="close" onclick="SearchLab.closeSettingsPanel()">&#215;</button>
+      <h1>Website Identity</h1>
+      <div class="card"><label>SELECT WEBSITE</label><select id="webSelectedSite" onchange="SearchLab.changeSelected()"></select></div>
+      <div class="preview"><div class="favicon" id="webPreviewIcon">A</div><div><strong id="webPreviewName">Articles</strong><div class="muted">Search result preview</div></div></div>
+      <div class="card"><label>SITE NAME</label><input id="webNameInput" type="text" oninput="SearchLab.preview()"></div>
+      <div class="card"><label>DOMAIN</label><input id="webDomainInput" type="text" oninput="SearchLab.preview()"></div>
+      <div class="card"><label>FAVICON</label><input id="webFileInput" type="file" accept="image/*" onchange="SearchLab.loadLogo(event)"><div class="hint">Each website keeps its own favicon. Square images are recommended.</div><div id="webFavWarning" class="hint"></div></div>
+      <div class="card"><label>OR FAVICON URL</label><input id="webUrlInput" type="url" placeholder="https://example.com/favicon.png" oninput="SearchLab.preview()" onblur="SearchLab.validateLogo(this.value)"></div>
+      <div class="actions"><button class="action" onclick="SearchLab.apply()">Apply to selected site</button><button class="action secondary" onclick="SearchLab.resetSite()">Reset site</button></div>
+      <div class="hint">Each site has an independent name, domain and favicon, so you can test several logo directions at the same time.</div>
+    </section>
+  </div>
+</div>
+
+<div class="tool-overlay" id="socialOverlay">
+  <button class="back-btn" onclick="Landing.closeOverlay('social')">&#8249; Back</button>
+  <div class="shell">
+    <div class="island"></div>
+    <div class="status"><span id="socialClock">9:41</span><span>&#9679; &#9679; &#9648;</span></div>
+
+    <header class="top-nav">
+      <div class="platform-tabs">
+        <button class="platform-tab active" id="socialTabX" onclick="SocialLab.switchPlatform('x')">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X (Twitter)
+        </button>
+        <button class="platform-tab" id="socialTabLinkedin" onclick="SocialLab.switchPlatform('linkedin')">
+          <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.78a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26z"/></svg>
+          LinkedIn
+        </button>
+      </div>
+      <button class="gear-btn" onclick="SocialLab.openPanel()" title="Settings">&#9881;</button>
+    </header>
+
+    <div class="preview-content">
+      <div class="x-view active" id="socialXView">
+        <div class="x-header">
+          <div class="x-banner" id="socialXBannerBox"></div>
+          <div class="x-avatar-wrapper">
+            <div class="x-avatar" id="socialXAvatarBox">N</div>
+          </div>
+        </div>
+        <div class="x-actions">
+          <button class="x-btn-follow">Follow</button>
+        </div>
+        <div class="x-profile-details">
+          <div class="x-name-row">
+            <span class="x-name" id="socialXNameText">APD Eine</span>
+            <svg class="x-verified" viewBox="0 0 24 24" fill="currentColor"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.19.46-1.39.02-2.95-1.08-3.99-1.08-1.08-2.61-1.51-4.02-1.07C14.44 2.45 13.2 1.5 11.75 1.5s-2.69.95-3.21 2.25c-1.41-.44-2.94-.01-4.02 1.07-1.1 1.04-1.54 2.6-1.08 3.99C2.13 9.33 1.25 10.57 1.25 12c0 1.43.88 2.67 2.19 3.19-.46 1.39-.02 2.95 1.08 3.99 1.08 1.08 2.61 1.51 4.02 1.07.52 1.3 1.76 2.25 3.21 2.25s2.69-.95 3.21-2.25c1.41.44 2.94.01 4.02-1.07 1.1-1.04 1.54-2.6 1.08-3.99 1.31-.52 2.19-1.76 2.19-3.19zm-12.71 4.25l-3.54-3.54 1.41-1.41 2.13 2.12 6.36-6.36 1.41 1.41-7.77 7.78z"/></svg>
+          </div>
+          <div class="x-handle" id="socialXHandleText">@apdeine</div>
+          <div class="x-bio" id="socialXBioText">Building modern tools and platforms for software creators worldwide.</div>
+          <div class="x-meta">
+            <span><strong>1,240</strong> Following</span>
+            <span><strong>48.2K</strong> Followers</span>
+          </div>
+        </div>
+        <div class="x-feed-divider"></div>
+        <div class="x-post">
+          <div class="x-post-avatar" id="socialXPostAvatarBox">N</div>
+          <div class="x-post-content">
+            <div class="x-post-header">
+              <span class="x-post-name" id="socialXPostName">APD Eine</span>
+              <span class="x-post-handle" id="socialXPostHandle">@apdeine &middot; 2h</span>
+            </div>
+            <div class="x-post-text">Excited to release our updated identity and brand system today! How does the mark look at micro scales?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="linkedin-view" id="socialLinkedinView">
+        <div class="li-card">
+          <div class="li-banner" id="socialLiBannerBox">
+            <div class="li-avatar-wrapper">
+              <div class="li-avatar" id="socialLiAvatarBox">N</div>
+            </div>
+          </div>
+          <div class="li-details">
+            <div class="li-name" id="socialLiNameText">APD Eine</div>
+            <div class="li-tagline" id="socialLiTaglineText">Software Development &bull; San Francisco, CA</div>
+            <div class="li-sub">48,210 followers &bull; 250 employees</div>
+            <button class="li-btn-follow">+ Follow</button>
+          </div>
+        </div>
+
+        <div class="li-post">
+          <div class="li-post-header">
+            <div class="li-post-avatar" id="socialLiPostAvatarBox">N</div>
+            <div class="li-post-info">
+              <span class="li-post-title" id="socialLiPostTitle">APD Eine</span>
+              <span class="li-post-sub">48,210 followers &bull; Promoted</span>
+            </div>
+          </div>
+          <div class="li-post-text">
+            Testing our brand avatar visibility across LinkedIn mobile feed cards. Clear geometry and strong contrast make all the difference.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="panel" id="socialSettingsPanel">
+      <button class="close-btn" onclick="SocialLab.closePanel()">&#215;</button>
+      <h1>Social Identity Settings</h1>
+
+      <div class="preview-bar">
+        <div class="preview-avatar" id="socialPanelPreviewAvatar">N</div>
+        <div>
+          <strong id="socialPanelPreviewName" style="color:#fff;font-size:15px;display:block">APD Eine</strong>
+          <span style="font-size:12px;color:#888" id="socialPanelPreviewHandle">@apdeine</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <label>COMPANY / BRAND NAME</label>
+        <input type="text" id="socialInputName" value="APD Eine" oninput="SocialLab.updatePreview()">
+      </div>
+
+      <div class="card">
+        <label>HANDLE / USERNAME</label>
+        <input type="text" id="socialInputHandle" value="apdeine" oninput="SocialLab.updatePreview()">
+      </div>
+
+      <div class="card">
+        <label>TAGLINE / BIO</label>
+        <textarea id="socialInputBio" oninput="SocialLab.updatePreview()">Building modern tools and platforms for software creators worldwide.</textarea>
+      </div>
+
+      <div class="card">
+        <label>UPLOAD LOGO / AVATAR</label>
+        <input type="file" id="socialInputFile" accept="image/*" onchange="SocialLab.handleFileUpload(event)">
+        <div style="font-size:11.5px;color:#777;margin-top:6px">Square image recommended (1:1 aspect ratio).</div>
+      </div>
+
+      <div class="card">
+        <label>OR LOGO IMAGE URL</label>
+        <input type="url" id="socialInputUrl" placeholder="https://example.com/logo.png" oninput="SocialLab.updatePreview()">
+      </div>
+
+      <div class="actions">
+        <button class="action-btn" onclick="SocialLab.saveSettings()">Apply Changes</button>
+        <button class="action-btn secondary" onclick="SocialLab.resetDefaults()">Reset</button>
+      </div>
+
+      <div class="disclaimer-box">
+        <strong>Notice:</strong> This preview environment is designed solely for visual logo testing and design assessment. The interface components are simulated visual mockups and are not affiliated with X Corp. or LinkedIn Corp.
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="js/app-lab.js"></script>
+<script src="js/search-lab.js"></script>
+<script src="js/social-lab.js"></script>
+<script src="js/main.js"></script>
+</body>
+                                              </html>
