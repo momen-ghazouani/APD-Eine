@@ -1,0 +1,50 @@
+(function(){
+  var overlays = {
+    app: document.getElementById('appOverlay'),
+    web: document.getElementById('webOverlay'),
+    social: document.getElementById('socialOverlay')
+  };
+
+  function closeAll(){
+    Object.keys(overlays).forEach(function(key){
+      overlays[key].classList.remove('open');
+    });
+  }
+
+  function openOverlay(key){
+    var el = overlays[key];
+    if(!el) return;
+    closeAll();
+    el.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeOverlay(key){
+    var el = overlays[key];
+    if(!el) return;
+    el.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  Object.keys(overlays).forEach(function(key){
+    overlays[key].addEventListener('click', function(e){
+      if(e.target === overlays[key]) closeOverlay(key);
+    });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      closeAll();
+      document.body.style.overflow = '';
+    }
+  });
+
+  window.Landing = {
+    openOverlay: openOverlay,
+    closeOverlay: closeOverlay
+  };
+
+  AppLab.init();
+  SearchLab.init();
+  SocialLab.init();
+})();
