@@ -1,4 +1,25 @@
-# APD-Eine
-Visual Tests For Your Brand
+## Visual Tests For Your Brand
 
 APD Eine is a set of small, open-source labs for pressure-testing a logo before it ships: how it sits inside an iOS home screen, how its favicon reads in a Google result, and how it looks as a profile avatar on X or LinkedIn. Pick a surface below and drop in an image to see it in place.
+
+## Live demo
+Open `index.html` in any browser — no build step, no dependencies. If hosted via GitHub Pages, it will be available at:
+`https://<your-username>.github.io/<repo-name>/`
+
+## Project structure
+```
+apd-eine/
+├── index.html          # Markup only
+├── css/
+│   └── style.css       # All styling
+├── js/
+│   ├── app-lab.js      # iOS home-screen icon lab
+│   ├── search-lab.js   # Google search-result favicon lab
+│   ├── social-lab.js   # X / LinkedIn profile avatar lab
+│   └── main.js         # Overlay open/close + init wiring
+└── README.md
+```
+
+## Notes
+- Data entered in each lab (names, logos, bios) is stored locally in the browser via `localStorage` — nothing is sent to a server.
+- The interface mockups for X and LinkedIn are simulated visual references for design testing and are not affiliated with X Corp. or LinkedIn Corp.
